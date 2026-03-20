@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'arial', 'Segoe UI', sans-serif; /* choose a sleek font */
+  font-size: 15px;       /* adjust size for readability */
+  font-weight: 400;      /* normal weight for body text */
+  color: #333;           /* neutral text color */
+  line-height: 1.6; 
+}
+
+h1, h2, h3{
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+p{
+    line-height: 1.6;
+    margin: 10px 0;
+}

@@ -1,0 +1,57 @@
+<div class="register-container">
+    <header class="register-header">
+        <h2>Create Account</h2>
+        <p class="subtitle">Join our blogging community today</p>
+    </header>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+        <div class="form-group">
+            <div><label for="username">Username</label></div>
+            <input type="text" formControlName="username" />
+            <div class="error"
+                *ngIf="registerForm?.get('username')?.errors?.['required'] && registerForm?.get('username')?.touched">
+                UserName is mandatory
+            </div>
+        </div>
+        <div class="form-group">
+            <div><label for="emailId">Email</label></div>
+            <input type="email" formControlName="emailId" />
+            <div class="error"
+                *ngIf="registerForm?.get('emailId')?.errors?.['required'] && registerForm?.get('emailId')?.touched">
+                Email is mandatory
+            </div>
+            <div class="error"
+                *ngIf="registerForm?.get('emailId')?.errors?.['pattern'] && registerForm?.get('emailId')?.touched">
+                Email must contain @ and .com
+            </div>
+        </div>
+        <div class="form-group">
+            <div><label for="password">Password</label></div>
+            <input type="password" formControlName="password" />
+            <div class="error"
+                *ngIf="registerForm?.get('password')?.errors?.['required'] && registerForm?.get('password')?.touched">
+                Password is mandatory
+            </div>
+            <div class="error"
+                *ngIf="registerForm?.get('password')?.errors?.['pattern'] && registerForm?.get('password')?.touched">
+                Password should be Alphanumeric and atleast 8 characters
+            </div>
+        </div>
+        <div class="form-group">
+            <div><label for="confirmPwd">Confirm Password</label></div>
+            <input type="password" formControlName="confirmPwd" />
+            <div class="error"
+                *ngIf="registerForm?.get('confirmPwd')?.errors?.['required'] && registerForm?.get('confirmPwd')?.touched">
+                Confirm Password is mandatory
+            </div>
+            <div class="error" *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.get('confirmPwd')?.touched">
+                Password and confirm password should mtach
+            </div>
+        </div>
+        <button type="submit" [disabled]="registerForm?.invalid" class="btn-primary">Create Account</button>
+    </form>
+
+    <div class="auth-footer">
+        <label>Already have an account?</label>
+        <a routerLink="/login" class="btn-link">Sign In</a>
+    </div>
+</div>

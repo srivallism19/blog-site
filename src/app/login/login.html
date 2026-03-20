@@ -1,0 +1,30 @@
+<div class="login-container">
+    <header class="login-header">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Sign in to continue your blogging journey</p>
+    </header>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+            <div><label for="emailId">Email</label></div>
+            <input type="email" formControlName="emailId" />
+            <div class="error"
+                *ngIf="loginForm?.get('emailId')?.errors?.['required'] && loginForm?.get('emailId')?.touched">
+                Email is mandatory
+            </div>
+        </div>
+        <div class="form-group">
+            <div><label for="password">Password</label></div>
+            <input type="password" formControlName="password" />
+            <div class="error"
+                *ngIf="loginForm?.get('password')?.errors?.['required'] && loginForm?.get('password')?.touched">
+                Password is mandatory
+            </div>
+        </div>
+        <button type="submit" [disabled]="loginForm?.invalid" class="btn-primary">SIGN IN</button>
+    </form>
+
+    <div class="auth-footer">
+        <label>Don't have an account?</label>
+        <a routerLink="/register" class="btn-link">Create Account</a>
+    </div>
+</div>
