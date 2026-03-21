@@ -10,5 +10,5 @@ export const routes: Routes = [
     {path: 'register', component: Register},
     {path: 'login', component: Login},
     {path: '', redirectTo: '/home', pathMatch: 'full'},
-    {path: 'blog-list', component: BlogList}
+    {path: 'blog-list/:userId', component: BlogList}
 ];

@@ -30,6 +30,7 @@ export class Header {
   }
 
   goToBlog(){
-    this.router.navigate(['/blog-list']);
+    const userId = sessionStorage.getItem("userId");
+    this.router.navigate(['/blog-list', userId]);
   }
 }

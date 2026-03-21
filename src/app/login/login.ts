@@ -31,7 +31,7 @@ export class Login {
 
       this.authService.loginUser(req).subscribe({
         next: (response) => {
-          this.authService.login(response.jwtToken);
+          this.authService.login(response.jwtToken, response.userId);
           alert(response.message);
         },
         error: (resp) =>{

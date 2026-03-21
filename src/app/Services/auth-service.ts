@@ -21,8 +21,9 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/blogsite/user/login`, userReq);
   }
 
-  login(token: string){
+  login(token: string, userId: number){
     sessionStorage.setItem('jwtToken', token);
+    sessionStorage.setItem('userId', userId.toString());
     this.loggedIn.next(true);
   }
 
@@ -32,6 +33,7 @@ export class AuthService {
 
   logout() {
     sessionStorage.removeItem('jwtToken');
+    sessionStorage.removeItem('userId');
     this.loggedIn.next(false);
   }
 }
