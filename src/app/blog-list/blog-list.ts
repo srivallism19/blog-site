@@ -15,13 +15,17 @@ export class BlogList {
   public userId: number = 0;
   public blogs: Blog[] = [];
   public blogForm !: FormGroup;
-  public showOverlay = false;
+  public editForm !: FormGroup;
+  public showAddOverlay = false;
+  public showEditOverlay = false;
+  public showDeleteOverlay = false;
   public loading = false;
+  selectedBlog: Blog | null = null;
 
   constructor(private route: ActivatedRoute,
     private blogService: BlogService,
     private fb: FormBuilder,
-  private cd: ChangeDetectorRef) { }
+    private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -30,7 +34,7 @@ export class BlogList {
         this.userId = Number(userId);
         this.loadBlogs(this.userId);
       }
-    });  
+    });
 
     //Initialise Reactive Form for Create blog
     this.blogForm = this.fb.group({
@@ -39,7 +43,14 @@ export class BlogList {
       Article: ['', [Validators.required, Validators.minLength(10)]],
       AuthorId: [this.userId],
       CreatedDateTime: [new Date()]
-    })
+    });
+
+    this.editForm = this.fb.group({
+      BlogName: [''],
+      Category: [''],
+      Article: ['']
+    });
+
   }
 
   loadBlogs(userId: number) {
@@ -54,17 +65,13 @@ export class BlogList {
     })
   }
 
-  openCreateBlog() {
-    this.showOverlay = true;
+  onCreateBlogClick() {
+    this.showAddOverlay = true;
     this.blogForm.reset({
       AuthorId: this.userId,
       CreatedDateTime: new Date()
     });
   }
-
-  editBlog(blog: Blog) { }
-
-  deleteBlog(blogId: any) { }
 
   saveBlog() {
     if (this.blogForm.valid) {
@@ -80,17 +87,68 @@ export class BlogList {
       this.blogService.addBlog(req).subscribe({
         next: (response) => {
           this.loadBlogs(this.userId);
-          alert("Blog is added successfully");
+          alert(response);
         },
-        error: (error) => {
-          alert("Blog is failed. Please try again");
+        error: (res) => {
+          alert(res);
         }
       });
-      this.showOverlay = false;
+      this.showAddOverlay = false;
     }
   }
 
+  onEditClick(blog: Blog) {
+    this.selectedBlog = blog;
+    this.showEditOverlay = true;
+    this.editForm.patchValue({
+      BlogName: blog.blogName,
+      Category: blog.category,
+      Article: blog.article
+    });
+
+  }
+
+  editBlog() {
+    if (this.selectedBlog) {
+      const updatedBlog: Blog = {
+        ...this.selectedBlog,
+        ...this.editForm.value
+      };
+
+      this.blogService.updateBlog(updatedBlog).subscribe({
+        next: (response) => {
+          this.loadBlogs(this.userId);
+          alert(response);
+        },
+        error: (res) => {
+          alert(res);
+        }
+      });
+      this.showEditOverlay = false;
+    }
+  }
+
+  onDeleteClick(blog: Blog) {
+    this.selectedBlog = blog;
+    this.showDeleteOverlay = true;
+  }
+
+  deleteBlog(selectedBlog: Blog) { 
+    this.blogService.deleteBlog(selectedBlog).subscribe({
+      next: (response) => {
+        this.loadBlogs(this.userId);
+        alert(response);
+      },
+      error: (res) => {
+        alert(res);
+      }
+    });
+    this.showDeleteOverlay = false;
+  }
+
   cancelOverlay(): void {
-    this.showOverlay = false;
+    this.showAddOverlay = false;
+    this.showEditOverlay = false;
+    this.showDeleteOverlay = false;
   }
 }

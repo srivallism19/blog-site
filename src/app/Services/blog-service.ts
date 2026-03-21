@@ -16,8 +16,19 @@ export class BlogService {
   }
 
   addBlog(blog: Blog): Observable<any>{
-    return this.http.post(`${this.apiUrl}/blogsite/user/blogs/add/<blogname>`, blog);
+    return this.http.post(`${this.apiUrl}/blogsite/user/blogs/add/<blogname>`, 
+      blog, 
+      {responseType: 'text'});
   }
 
-  
+  updateBlog(blog: Blog): Observable<any>{
+    return this.http.put(`${this.apiUrl}/blogsite/user/blogs/update/<id>?blogId=${blog.blogId}`, 
+      blog, 
+      {responseType: 'text'});
+  }
+
+  deleteBlog(blog: Blog): Observable<any>{
+    return this.http.delete(`${this.apiUrl}/blogsite/user/delete/<blogname>?blogName=${blog.blogName}&authorId=${blog.authorId}`, 
+      {responseType: 'text'});
+  }
 }

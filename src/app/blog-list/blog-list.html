@@ -1,7 +1,7 @@
 <div class="blogs-container">
     <div class="blogs-header">
         <h2 class="blogs-title">My Blogs</h2>
-        <button class="create-btn" (click)="openCreateBlog()">+ Create New Blog</button>
+        <button class="create-btn" (click)="onCreateBlogClick()">+ Create New Blog</button>
     </div>
     <div>Manage and view all your published articles</div>
 
@@ -28,8 +28,8 @@
                     <td>{{ blog.authorId }}</td>
                     <td>{{ blog.createdDateTime | date:'medium' }}</td>
                     <td>
-                        <button class="edit-btn" (click)="editBlog(blog)">Edit</button>
-                        <button class="delete-btn" (click)="deleteBlog(blog.blogId)">Delete</button>
+                        <button class="edit-btn" (click)="onEditClick(blog)">Edit</button>
+                        <button class="delete-btn" (click)="onDeleteClick(blog)">Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -41,13 +41,13 @@
         <div class="blogs-content">
             <h3>No Blogs Yet</h3>
             <div>Start sharing your thoughts and ideas with the world!</div>
-            <button class="first-blog-btn" (click)="openCreateBlog()">Create Your First Blog</button>
+            <button class="first-blog-btn" (click)="onCreateBlogClick()">Create Your First Blog</button>
         </div>
     </ng-template>
 </div>
 
 <!--- Overlay for create a blog -->
-<div class="overlay" *ngIf="showOverlay">
+<div class="overlay" *ngIf="showAddOverlay">
     <div class="overlay-content">
         <h3>Create a Blog</h3>
         <form [formGroup]="blogForm" (ngSubmit)="saveBlog()">
@@ -99,5 +99,75 @@
             <div class="loader" *ngIf="loading">Saving...</div>
 
         </form>
+    </div>
+</div>
+
+<!--- Overlay for edit a blog -->
+<div class="overlay" *ngIf="showEditOverlay">
+    <div class="overlay-content">
+        <h3>Update a Blog</h3>
+        <form [formGroup]="editForm" (ngSubmit)="editBlog()">
+            <div class="form-group">
+                <label for="BlogName">Blog Name:</label>
+                <input type="text" formControlName="BlogName" />
+                <div class="error"
+                    *ngIf="editForm?.get('BlogName')?.errors?.['required'] && editForm?.get('BlogName')?.touched">
+                    BlogName is mandatory
+                </div>
+                <div class="error"
+                    *ngIf="editForm?.get('BlogName')?.errors?.['minlength'] && editForm?.get('BlogName')?.touched">
+                    BlogName should be minimum of 20 characters
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Category">Category:</label>
+                <input type="text" formControlName="Category" />
+                <div class="error"
+                    *ngIf="editForm?.get('Category')?.errors?.['required'] && editForm?.get('Category')?.touched">
+                    Category is mandatory
+                </div>
+                <div class="error"
+                    *ngIf="editForm?.get('Category')?.errors?.['minlength'] && editForm?.get('Category')?.touched">
+                    Category should be minimum of 20 characters
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Article">Article:</label>
+                <input type="text" formControlName="Article" />
+                <div class="error"
+                    *ngIf="editForm?.get('Article')?.errors?.['required'] && editForm?.get('Article')?.touched">
+                    Article is mandatory
+                </div>
+                <div class="error"
+                    *ngIf="editForm?.get('Article')?.errors?.['minlength'] && editForm?.get('Article')?.touched">
+                    Article should be minimum of 10 characters
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" [disabled]="loading || editForm.invalid">Update</button>
+                <button type="button" class="btn-primary" (click)="cancelOverlay()">Cancel</button>
+            </div>
+
+            <!-- Loader -->
+            <div class="loader" *ngIf="loading">Saving...</div>
+
+        </form>
+    </div>
+
+</div>
+
+<!--Overlay for delete a blog-->
+<div class="overlay" *ngIf="showDeleteOverlay && selectedBlog">
+    <div class="overlay-content">
+        <h3>Confirm Delete</h3>
+        <p>Are you sure you want to delete "{{ selectedBlog.blogName }}"?</p>
+
+        <div class="actions">
+            <button class="btn-confirm" (click)="deleteBlog(selectedBlog)">Yes, Delete</button>
+            <button class="btn-cancel" (click)="cancelOverlay()">Cancel</button>
+        </div>
     </div>
 </div>
