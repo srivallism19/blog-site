@@ -1,0 +1,53 @@
+<div class="blogs-container">
+    <div class="blogs-header">
+        <h2 class="blogs-title">All Blogs</h2>
+        <div>Search blogs by category or Duration</div>
+    </div>
+    <div>
+        <label for="category">Category:</label>
+        <input type="text" placeholder="category" [(ngModel)]="category" />
+
+        <label for="startDate">Start Range:</label>
+        <input type="date" placeholder="startDate" [(ngModel)]="startDate" />
+
+        <label for="endDate">End Range:</label>
+        <input type="date" placeholder="endDate" [(ngModel)]="endDate" />
+
+        <button class="search-btn" (click)="getBlogsByCategory()">Search</button>
+    </div>
+</div>
+
+
+<div *ngIf="blogs.length > 0; else noBlogsView" class="blogs-content">
+    <table class="blogs-table">
+        <thead>
+            <tr>
+                <th>Blog Id</th>
+                <th>Blog Name</th>
+                <th>Category</th>
+                <th>Article</th>
+                <th>Author Id</th>
+                <th>Created Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let blog of blogs">
+                <td>{{ blog.blogId }}</td>
+                <td>{{ blog.blogName }}</td>
+                <td>{{ blog.category }}</td>
+                <td>{{ blog.article }}</td>
+                <td>{{ blog.authorId }}</td>
+                <td>{{ blog.createdDateTime | date:'medium' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- If no blogs exist -->
+<ng-template #noBlogsView>
+    <div class="blogs-content">
+        <h3>No Blogs Yet</h3>
+        <div>Try with different category and duration!!!</div>
+    </div>
+</ng-template>

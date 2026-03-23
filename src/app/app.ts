@@ -5,10 +5,11 @@ import { Header } from './header/header';
 import { Register } from './register/register';
 import { Login } from './login/login';
 import { BlogList } from './blog-list/blog-list';
+import { BlogSearch } from './blog-search/blog-search';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Register, Login, BlogList],
+  imports: [RouterOutlet, Header, Register, Login, BlogList, BlogSearch],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

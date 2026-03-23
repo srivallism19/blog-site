@@ -31,4 +31,12 @@ export class BlogService {
     return this.http.delete(`${this.apiUrl}/blogsite/user/delete/<blogname>?blogName=${blog.blogName}&authorId=${blog.authorId}`, 
       {responseType: 'text'});
   }
+
+  getBlogsByCategory(category: string):Observable<any>{
+    return this.http.get(`${this.apiUrl}/blogsite/blogs/info/<category>?category=${category}`);
+  }
+
+  getBlogsByCategoryDuration(category: string, startDate : string, endDate: string):Observable<any>{
+    return this.http.get(`${this.apiUrl}/blogsite/blogs/get/<category>/<durationFromRange>/<durationToRange>?category=${category}&startDate=${startDate}&endDate=${endDate}`);
+  }
 }

@@ -33,4 +33,8 @@ export class Header {
     const userId = sessionStorage.getItem("userId");
     this.router.navigate(['/blog-list', userId]);
   }
+
+  goToAllBlogs(){
+    this.router.navigate(['/app-blog-search']);
+  }
 }
