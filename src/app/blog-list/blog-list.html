@@ -28,8 +28,11 @@
                     <td>{{ blog.authorId }}</td>
                     <td>{{ blog.createdDateTime | date:'medium' }}</td>
                     <td>
-                        <button class="edit-btn" (click)="onEditClick(blog)">Edit</button>
-                        <button class="delete-btn" (click)="onDeleteClick(blog)">Delete</button>
+                        <!-- <button class="edit-btn" (click)="onEditClick(blog)">Edit</button>
+                        <button class="delete-btn" (click)="onDeleteClick(blog)">Delete</button> -->
+                        <i class="fas fa-edit edit-icon" (click)="onEditClick(blog)"></i>
+                        <i class="fas fa-trash delete-icon" (click)="onDeleteClick(blog)"></i>
+                    
                     </td>
                 </tr>
             </tbody>
@@ -50,7 +53,7 @@
 <div class="overlay" *ngIf="showAddOverlay">
     <div class="overlay-content">
         <h3>Create a Blog</h3>
-        <form [formGroup]="blogForm" (ngSubmit)="saveBlog()">
+        <form [formGroup]="blogForm" (ngSubmit)="saveBlog()" class="blogForm">
             <div class="form-group">
                 <label for="BlogName">Blog Name:</label>
                 <input type="text" formControlName="BlogName" />
@@ -91,8 +94,8 @@
             </div>
 
             <div class="actions">
-                <button type="submit" [disabled]="loading || blogForm.invalid">Save</button>
-                <button type="button" class="btn-primary" (click)="cancelOverlay()">Cancel</button>
+                <button type="submit" [disabled]="loading || blogForm.invalid" class="save-btn">Save</button>
+                <button type="button" class="cancel-btn" (click)="cancelOverlay()">Cancel</button>
             </div>
 
             <!-- Loader -->
@@ -106,7 +109,7 @@
 <div class="overlay" *ngIf="showEditOverlay">
     <div class="overlay-content">
         <h3>Update a Blog</h3>
-        <form [formGroup]="editForm" (ngSubmit)="editBlog()">
+        <form [formGroup]="editForm" (ngSubmit)="editBlog()" class="editForm">
             <div class="form-group">
                 <label for="BlogName">Blog Name:</label>
                 <input type="text" formControlName="BlogName" />
@@ -147,8 +150,8 @@
             </div>
 
             <div class="actions">
-                <button type="submit" [disabled]="loading || editForm.invalid">Update</button>
-                <button type="button" class="btn-primary" (click)="cancelOverlay()">Cancel</button>
+                <button type="submit" class="save-btn" [disabled]="loading || editForm.invalid">Update</button>
+                <button type="button" class="cancel-btn" (click)="cancelOverlay()">Cancel</button>
             </div>
 
             <!-- Loader -->
@@ -166,7 +169,7 @@
         <p>Are you sure you want to delete "{{ selectedBlog.blogName }}"?</p>
 
         <div class="actions">
-            <button class="btn-confirm" (click)="deleteBlog(selectedBlog)">Yes, Delete</button>
+            <button class="delete-btn" (click)="deleteBlog(selectedBlog)">Yes, Delete</button>
             <button class="btn-cancel" (click)="cancelOverlay()">Cancel</button>
         </div>
     </div>

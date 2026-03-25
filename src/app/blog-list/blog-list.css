@@ -122,15 +122,36 @@
     outline: none;
 }
 
+.editForm .form-group {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    /* label column + input column */
+    align-items: center;
+    gap: 1rem;
+}
+
+.editForm label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.editForm input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
 .actions {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
   }
-  
-  .actions button {
-    padding: 8px 16px;
-  }  
 
 .error {
     color: red;
@@ -138,41 +159,77 @@
     margin-top: 4px;
 }
 
-.btn-primary {
+.save-btn {
     width: 50%;
     padding: 12px;
-    background-color: #0078d7;
+    background-color: green;
     color: #fff;
     border: none;
     border-radius: 6px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    margin: 8px;
     transition: background-color 0.2s ease;
 }
 
-.btn-primary:disabled {
-    background-color: #a0c4e3;
+.cancel-btn {
+    width: 50%;
+    padding: 12px;
+    background-color: grey;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.save-btn:disabled {
+    background-color: #bbecdc;
     cursor: not-allowed;
 }
-
-.btn-primary:hover:not(:disabled) {
-    background-color: #005fa3;
-}
-
-.btn-confirm {
-    background: #d9534f;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-  }
   
   .btn-cancel {
-    background: #6c757d;
+    width: 50%;
+    padding: 12px;
+    background-color: grey;
     color: #fff;
     border: none;
-    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    margin: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .delete-btn {
+    background-color: red;
+    width: 50%;
+    padding: 12px;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 8px;
+    transition: background-color 0.2s ease;
   }
   
+  .edit-icon, .delete-icon {
+    cursor: pointer;       /* makes cursor a pointer */
+    margin: 0 8px;
+    font-size: 20px;
+  }
+  
+  .edit-icon {
+    color: #0078d7;        /* blue for edit */
+  }
+  
+  .delete-icon {
+    color: red;        /* red for delete */
+  }

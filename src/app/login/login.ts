@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../Services/auth-service';
-import { User } from '../Entities/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class Login {
   loginForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService){
+  constructor(private fb: FormBuilder, private authService: AuthService, public router: Router){
     this.loginForm = this.fb.nonNullable.group({
       emailId: ['', [Validators.required]],
       password: ['', [Validators.required]]
@@ -33,6 +33,8 @@ export class Login {
         next: (response) => {
           this.authService.login(response.jwtToken, response.userId);
           alert(response.message);
+          const userId = sessionStorage.getItem("userId");
+          this.router.navigate(['/blog-list', userId]);
         },
         error: (resp) =>{
           alert(resp.message);

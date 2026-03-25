@@ -75,6 +75,7 @@ export class BlogList {
 
   saveBlog() {
     if (this.blogForm.valid) {
+      this.loading = true;
       const req: Blog = {
         blogId: 0,
         blogName: this.blogForm.value.BlogName,
@@ -88,9 +89,11 @@ export class BlogList {
         next: (response) => {
           this.loadBlogs(this.userId);
           alert(response);
+          this.loading = false;
         },
         error: (res) => {
           alert(res);
+          this.loading = false;
         }
       });
       this.showAddOverlay = false;
