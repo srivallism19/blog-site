@@ -26,17 +26,17 @@
                 <th>Blog Name</th>
                 <th>Category</th>
                 <th>Article</th>
-                <th>Author Id</th>
+                <th>Author Name</th>
                 <th>Created Date</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let blog of blogs">
-                <td>{{ blog.blogId }}</td>
+            <tr *ngFor="let blog of blogs; let i=index">
+                <td>{{ i+1 }}</td>
                 <td>{{ blog.blogName }}</td>
                 <td>{{ blog.category }}</td>
                 <td>{{ blog.article }}</td>
-                <td>{{ blog.authorId }}</td>
+                <td>{{ blog.authorName }}</td>
                 <td>{{ blog.createdDateTime | date:'medium' }}</td>
             </tr>
         </tbody>
@@ -45,7 +45,7 @@
 
 <!-- If no blogs exist -->
 <ng-template #noBlogsView>
-    <div class="blogs-content">
+    <div class="no-blogs-content">
         <h3>No Blogs Yet</h3>
         <div>Try with different category and duration!!!</div>
     </div>

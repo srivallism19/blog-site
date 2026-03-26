@@ -26,8 +26,12 @@
 }
 
 .blogs-content {
+    text-align: left;
+    margin-top: 40px;
+}
+
+.no-blogs-content {
     text-align: center;
-    /* Center all content */
     margin-top: 40px;
 }
 
@@ -51,7 +55,7 @@
 
 .blogs-table th,
 .blogs-table td {
-    border: 1px solid #ddd;
+    border: 4px solid #ddd;
     padding: 8px;
 }
 

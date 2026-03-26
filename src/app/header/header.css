@@ -13,17 +13,17 @@
     text-decoration: none;
 }
 
-.nav-right .nav-login-btn{
+.nav-right .nav-login-btn {
     background-color: #0078d7;
-     color: white;
-     margin-left: 16px;
-     padding: 8px 16px;
-     font-weight: bold;
-     cursor: pointer;
-     border-radius: 8px;
+    color: white;
+    margin-left: 16px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-.nav-right .nav-register-btn{
+.nav-right .nav-register-btn {
     background-color: rgb(74, 138, 74);
     color: white;
     margin-left: 16px;
@@ -33,17 +33,22 @@
     border-radius: 8px;
 }
 
-.nav-right .nav-blogs-btn{
+.nav-right .nav-blogs-btn,
+.nav-right .nav-all-blogs-btn {
     background-color: #0078d7;
-     color: white;
-     margin-left: 16px;
-     padding: 8px 16px;
-     font-weight: bold;
-     cursor: pointer;
-     border-radius: 8px;
+    color: white;
+    margin-left: 16px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-.nav-right .nav-logout-btn{
+.nav-right .nav-all-blogs-btn {
+    background-color: lightseagreen;
+}
+
+.nav-right .nav-logout-btn {
     background-color: red;
     color: white;
     margin-left: 16px;
@@ -53,6 +58,6 @@
     border-radius: 8px;
 }
 
-.nav-right .nav-btn:hover{
+.nav-right .nav-btn:hover {
     background-color: #ddd;
 }

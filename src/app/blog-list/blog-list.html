@@ -14,18 +14,18 @@
                     <th>Blog Name</th>
                     <th>Category</th>
                     <th>Article</th>
-                    <th>Author Id</th>
+                    <th>Author Name</th>
                     <th>Created Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let blog of blogs">
-                    <td>{{ blog.blogId }}</td>
+                <tr *ngFor="let blog of blogs; let i=index">
+                    <td>{{ i+1 }}</td>
                     <td>{{ blog.blogName }}</td>
                     <td>{{ blog.category }}</td>
                     <td>{{ blog.article }}</td>
-                    <td>{{ blog.authorId }}</td>
+                    <td>{{ blog.authorName }}</td>
                     <td>{{ blog.createdDateTime | date:'medium' }}</td>
                     <td>
                         <!-- <button class="edit-btn" (click)="onEditClick(blog)">Edit</button>
@@ -41,7 +41,7 @@
 
     <!-- If no blogs exist -->
     <ng-template #noBlogsView>
-        <div class="blogs-content">
+        <div class="no-blogs-content">
             <h3>No Blogs Yet</h3>
             <div>Start sharing your thoughts and ideas with the world!</div>
             <button class="first-blog-btn" (click)="onCreateBlogClick()">Create Your First Blog</button>

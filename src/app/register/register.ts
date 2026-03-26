@@ -3,10 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validatio
 import { CommonModule } from '@angular/common';
 import { User } from '../Entities/User';
 import { AuthService } from '../Services/auth-service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   standalone: true,
   templateUrl: './register.html',
   styleUrl: './register.css',
@@ -15,7 +16,7 @@ export class Register {
   registerForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.nonNullable.group({
       username: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.pattern(/^[^@]+@[^@]+\.[Cc][oO][mM]$/)]],
@@ -41,10 +42,13 @@ export class Register {
 
       this.authService.registerUser(req).subscribe({
         next: (response) => {
-          alert("User is registered successfully");
+          alert(response);
+          if (response == "User is registered successfully") {
+            this.router.navigate(['/login']);
+          }
         },
-        error: (error) => {
-          alert("User Registration is failed. Please try again");
+        error: (resp) => {
+          alert(resp);
         }
       });
     }

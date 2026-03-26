@@ -46,9 +46,9 @@ export class BlogList {
     });
 
     this.editForm = this.fb.group({
-      BlogName: [''],
-      Category: [''],
-      Article: ['']
+      BlogName: ['', [Validators.required]],
+      Category: ['', [Validators.required]],
+      Article: ['', [Validators.required]]
     });
 
   }
@@ -82,6 +82,7 @@ export class BlogList {
         category: this.blogForm.value.Category,
         article: this.blogForm.value.Article,
         authorId: this.blogForm.value.AuthorId,
+        authorName: "",
         createdDateTime: this.blogForm.value.CreatedDateTime
       };
 

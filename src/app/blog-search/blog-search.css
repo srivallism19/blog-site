@@ -23,6 +23,16 @@
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.blogs-content {
+    text-align: left;
+    margin: 30px;
+}
+
+.no-blogs-content {
+    text-align: center;
+    margin-top: 40px;
+}
+
 .blogs-table {
     width: 100%;
     border-collapse: collapse;
@@ -38,12 +48,6 @@
 .blogs-table th {
     background-color: #f4f4f4;
     text-align: left;
-}
-
-.blogs-content {
-    text-align: center;
-    /* Center all content */
-    margin-top: 40px;
 }
 
 .search-btn {

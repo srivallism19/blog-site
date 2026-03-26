@@ -4,5 +4,6 @@ export interface Blog {
     category: string,
     article: string,
     authorId: number,
+    authorName: string,
     createdDateTime: Date
 }
